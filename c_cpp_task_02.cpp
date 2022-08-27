@@ -13,7 +13,7 @@
  * @param[in,out]  address     配列の先頭アドレスを持つポインタ
  * @param[in]      size        配列のサイズ
  */
-void initalizeArray(int &address, int size) {
+void initalizeArray(int *address, int size) {
 
     // ランダムな値を利用する為の準備
     srand(time(NULL));
@@ -21,7 +21,7 @@ void initalizeArray(int &address, int size) {
     // ランダムな値で配列の内容を初期化する
     for (int i = 0; i < size; ++i) {
         // 配列の要素のアドレスを p に代入する
-        int *p = &address + i;
+        int *p = address + i;
         // 0 ～ 9 のランダムな整数を初期値として代入する
         *p = (rand() % 10);
     }
@@ -35,12 +35,13 @@ void initalizeArray(int &address, int size) {
  * @param[in]      size        配列のサイズ
  * @return         配列の総和         
  */
-int calcSum(int a[10], int size) {
+int calcSum(int *address, int size) {
 
     int sum = 0;
 
     for (int i = 0; i < size; ++i) {
-        sum = sum + a[i];
+        int* p = address + i;
+        sum = sum + *p;
     }
 
     return sum;
@@ -56,7 +57,7 @@ int main() {
     int a[10] = {};
 
     // 配列を初期化する
-    initalizeArray(*a, 10);
+    initalizeArray(a, 10);
 
     // 配列の総和を計算する
     int total = calcSum(a, 10);
